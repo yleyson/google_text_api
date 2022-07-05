@@ -37,6 +37,7 @@ TextRouter.post('/', async (req, res) => {
         })
         .catch(err => {
             console.log(err)
+            console.log(req.body.text)
             res.status(500).json({ err });
         });
 });
