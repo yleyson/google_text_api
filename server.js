@@ -20,5 +20,13 @@ server.listen(PORT, () => {
 });
 
 
+server.use(bodyParser.json({
+    limit: '50mb'
+}));
 
+server.use(bodyParser.urlencoded({
+    limit: '50mb',
+    parameterLimit: 100000,
+    extended: true
+}));
 
