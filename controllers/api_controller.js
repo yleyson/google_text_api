@@ -33,12 +33,12 @@ TextRouter.post('/', async (req, res) => {
         .then(response => {
             let [result] = response
             text = result.fullTextAnnotation.text
+            res.status(201).json(text);
         })
         .catch(err => {
             console.log(err)
+            res.status(500).json({ err });
         });
-    res.end(text)
-
 });
 
 module.exports = TextRouter;
