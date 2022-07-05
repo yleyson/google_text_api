@@ -23,7 +23,9 @@ TextRouter.post('/', async (req, res) => {
 
     const request = {
         image: {
-            content: req.body.text
+            source: {
+                imageUri: req.body.url
+            }
         }
     };
 
