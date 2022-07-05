@@ -19,14 +19,11 @@ const client = new vision.ImageAnnotatorClient(CONFIG);
 
 
 TextRouter.post('/', async (req, res) => {
-    console.log("key" + process.env.API_KEY)
-    console.log("CLIENT_EMAIL" + process.env.CLIENT_EMAIL)
+    console.log(req.body.text)
 
     const request = {
         image: {
-            source: {
-                imageUri: req.body.url
-            }
+            content: req.body.text
         }
     };
 
