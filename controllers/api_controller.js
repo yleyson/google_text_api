@@ -23,7 +23,7 @@ TextRouter.post('/', async (req, res) => {
 
     const request = {
         image: {
-            content: req.body.text
+            content: req.body.img.base64
         }
     };
 
