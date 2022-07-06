@@ -34,6 +34,7 @@ TextRouter.post('/', async (req, res) => {
         .then(response => {
             let [result] = response
             text = result.fullTextAnnotation.text
+            console.log(text)
             res.status(201).json(text);
         })
         .catch(err => {
