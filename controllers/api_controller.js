@@ -49,6 +49,7 @@ TextRouter.post('/', async (req, res) => {
     const [result] = await client.batchAnnotateImages(request);
     const detections = result.responses[0].fullTextAnnotation;
     console.log(detections.text);
+    res.end(detections.text)
     /*
         await client
             .batchAnnotateImages(request)
