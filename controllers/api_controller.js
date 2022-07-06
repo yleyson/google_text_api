@@ -20,27 +20,56 @@ const client = new vision.ImageAnnotatorClient(CONFIG);
 
 TextRouter.post('/', async (req, res) => {
     console.log(req.body.text)
+    let text = ""
 
-    const request = {
+    const request2 = {
         image: {
             content: req.body.text
         }
     };
 
-    let text = ""
+    const request = {
+        "requests": [
+            {
+                "image": {
+                    "content": req.body.text
+                },
+                "features": [
+                    {
+                        "type": "DOCUMENT_TEXT_DETECTION"
+                    }
+                ],
+                "imageContext": {
+                    "languageHints": ["iw"]
+                }
+            }
+        ]
+    };
 
-    await client
-        .textDetection(request)
-        .then(response => {
-            let [result] = response
-            text = result.fullTextAnnotation.text
-            console.log(text)
-            res.status(201).json(text);
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ err });
-        });
+    const [result] = await client.batchAnnotateImages(request);
+    const detections = result.responses[0].fullTextAnnotation;
+    console.log(detections.text);
+    /*
+        await client
+            .batchAnnotateImages(request)
+            .then(response => {
+                let [result] = response
+                text = result.fullTextAnnotation.text
+                console.log(text)
+                res.status(201).json(text);
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).json({ err });
+            });
+            */
+
+
+    /*
+        let text = ""
+    
+        cc
+            */
 });
 
 module.exports = TextRouter;
