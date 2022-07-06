@@ -46,10 +46,25 @@ TextRouter.post('/', async (req, res) => {
         ]
     };
 
-    const [result] = await client.batchAnnotateImages(request);
-    const detections = result.responses[0].fullTextAnnotation;
-    console.log(detections.text);
-    res.end(detections.text)
+    await client
+        .batchAnnotateImages(request)
+        .then(response => {
+            let [result] = response
+            const detections = result.responses[0].fullTextAnnotation;
+            console.log(detections.text)
+            res.status(201).json(detections.text);
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ err });
+        });
+    /*
+
+const [result] = await client.batchAnnotateImages(request);
+const detections = result.responses[0].fullTextAnnotation;
+console.log(detections.text);
+res.end(detections.text)
+*/
     /*
         await client
             .batchAnnotateImages(request)
