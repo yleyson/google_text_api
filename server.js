@@ -8,17 +8,12 @@ const PORT = process.env.PORT || 5008;
 
 //create server
 const server = express();
-server.use(express.json()); //enable json support
+server.use(express.json({
+    limit: '50mb'
+})); //enable json support
 server.use(cors()); //enable global access
 server.use(helmet()); //more defense
 
-server.use(express.json({
-    limit: '50mb'
-}));
-
-server.use(express.urlencoded({
-    limit: '50mb'
-}));
 
 server.use('/api/google_text', require('./controllers/api_controller'));
 
