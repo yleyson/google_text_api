@@ -58,34 +58,7 @@ TextRouter.post('/', async (req, res) => {
             console.log(err)
             res.status(500).json({ err });
         });
-    /*
 
-const [result] = await client.batchAnnotateImages(request);
-const detections = result.responses[0].fullTextAnnotation;
-console.log(detections.text);
-res.end(detections.text)
-*/
-    /*
-        await client
-            .batchAnnotateImages(request)
-            .then(response => {
-                let [result] = response
-                text = result.fullTextAnnotation.text
-                console.log(text)
-                res.status(201).json(text);
-            })
-            .catch(err => {
-                console.log(err)
-                res.status(500).json({ err });
-            });
-            */
-
-
-    /*
-        let text = ""
-    
-        cc
-            */
 });
 
 module.exports = TextRouter;
